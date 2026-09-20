@@ -613,37 +613,108 @@ function mockReply(text){
   return conversationReply(text);
 }
 
-function send(){
-  const input=document.getElementById('input'), text=input.value.trim();
-  if(!text)return;
+async function send(){
 
-  document.getElementById('hero').style.display='none';
-  const box=document.getElementById('messages');
-  box.insertAdjacentHTML('beforeend',`<div class="msg" style="display:block"><div class="bubble user">${escapeHtml(text)}</div></div>`);
+  const input = document.getElementById('input');
+  const text = input.value.trim();
 
-  const explicit=detectLanguageRequest(text);
-  const detected=detectNonEnglish(text);
+  if(!text) return;
+
+  document.getElementById('hero').style.display = 'none';
+
+  const box = document.getElementById('messages');
+
+  box.insertAdjacentHTML(
+    'beforeend',
+    `<div class="msg" style="display:block">
+      <div class="bubble user">${escapeHtml(text)}</div>
+    </div>`
+  );
+
+  const explicit = detectLanguageRequest(text);
+  const detected = detectNonEnglish(text);
 
   if(explicit){
-    novaLanguage=explicit;
-    languageOfferShown=true;
-    const label=explicit==='english'?'English':explicit==='telugu'?'Telugu':'Tanglish';
-    const confirmation = explicit==='telugu'
-      ? 'సరే 😊 ఇక నుంచి మన conversation తెలుగులో కొనసాగిద్దాం.'
-      : explicit==='tanglish'
-        ? 'Sare bro 😊 Ippati nunchi manam Tanglish lo continue cheddam.'
-        : "Got it 💫 I'll continue in <strong>English</strong> from here.";
-    showNovaThinking(); setTimeout(()=>{hideNovaThinking();appendNovaMessage(confirmation,{source:text})},700);
-  }else if(novaLanguage==='english' && detected && !languageOfferShown){
-    languageOfferShown=true;
-    showNovaThinking(); setTimeout(()=>{hideNovaThinking();appendNovaMessage(languagePrompt(),{source:text})},700);
+
+    novaLanguage = explicit;
+    languageOfferShown = true;
+
+    const confirmation =
+      explicit === 'telugu'
+        ? 'సరే 😊 ఇక నుంచి మన conversation తెలుగులో కొనసాగిద్దాం.'
+        : explicit === 'tanglish'
+          ? 'Sare bro 😊 Ippati nunchi manam Tanglish lo continue cheddam.'
+          : "Got it 💫 I'll continue in <strong>English</strong> from here.";
+
+    showNovaThinking();
+
+    setTimeout(() => {
+      hideNovaThinking();
+      appendNovaMessage(confirmation, {source:text});
+    }, 700);
+
+  }else if(
+    novaLanguage === 'english' &&
+    detected &&
+    !languageOfferShown
+  ){
+
+    languageOfferShown = true;
+
+    showNovaThinking();
+
+    setTimeout(() => {
+      hideNovaThinking();
+      appendNovaMessage(languagePrompt(), {source:text});
+    }, 700);
+
   }else{
-    showNovaThinking(); setTimeout(()=>{hideNovaThinking();appendNovaMessage(mockReply(text),{source:text})},900);
+
+    showNovaThinking();
+
+    try{
+
+      const response = await fetch(
+        'http://localhost:3000/api/chat',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: text
+          })
+        }
+      );
+
+      const data = await response.json();
+
+      hideNovaThinking();
+
+      if(!response.ok){
+        throw new Error(data.error || 'NOVA Brain error');
+      }
+
+      appendNovaMessage(
+        data.reply || 'NOVA could not generate a response.',
+        {source:text}
+      );
+
+    }catch(error){
+
+      hideNovaThinking();
+
+      appendNovaMessage(
+        '⚠️ NOVA Brain is unavailable. Make sure the NOVA backend and Ollama are running.',
+        {source:text}
+      );
+
+      console.error('NOVA Brain error:', error);
+    }
   }
 
-  input.value='';
+  input.value = '';
 }
-
 function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
 function toggleMenu(){
   const sidebar=document.querySelector('.sidebar');
