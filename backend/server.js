@@ -52,12 +52,16 @@ app.post("/api/chat", async (req, res) => {
 
     const data = await ollamaResponse.json();
 
-    let reply = data.message?.content || "";
+let reply = data.message?.content || "";
 
-    // Remove any hidden thinking content if the model returns it.
-    reply = reply
-      .replace(/<think>[\s\S]*?<\/think>/gi, "")
-      .trim();
+// Remove Qwen thinking/reasoning from the response.
+if (reply.includes("</think>")) {
+  reply = reply.split("</think>").pop();
+}
+
+reply = reply
+  .replace(/<think>[\s\S]*?<\/think>/gi, "")
+  .trim();
 
     if (!reply) {
       reply = "NOVA could not generate a response.";
