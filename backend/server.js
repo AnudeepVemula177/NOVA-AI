@@ -29,7 +29,7 @@ IDENTITY RULES:
 - Do not introduce yourself as Ollama.
 - Do not introduce yourself as Tongyi.
 - Do not say you are ChatGPT.
-- Do not mention the underlying model unless the user specifically asks about it.
+- Do not mention the underlying model unless the user specifically asks about the technology behind NOVA.
 
 LANGUAGE:
 - Follow the language used by the user.
@@ -38,10 +38,10 @@ LANGUAGE:
 - Tanglish input -> natural Tanglish response.
 
 STYLE:
-- Be friendly.
-- Be clear.
-- Be helpful.
+- Be friendly and natural.
+- Be clear and helpful.
 - Answer directly.
+- Avoid unnecessary long introductions.
 - Do not reveal hidden reasoning or internal thinking.
 `;
 
@@ -120,7 +120,7 @@ app.post("/api/chat", async (req, res) => {
 
 
     // ========================================
-    // REMOVE THINKING OUTPUT
+    // REMOVE THINKING / REASONING
     // ========================================
 
     if (reply.includes("</think>")) {
@@ -149,12 +149,13 @@ app.post("/api/chat", async (req, res) => {
     // ========================================
 
     if (!reply) {
-      reply = "I'm NOVA, but I couldn't generate a response right now.";
+      reply =
+        "I'm NOVA, but I couldn't generate a response right now.";
     }
 
 
     // ========================================
-    // SEND TO FRONTEND
+    // SEND RESPONSE TO FRONTEND
     // ========================================
 
     res.json({
@@ -167,7 +168,8 @@ app.post("/api/chat", async (req, res) => {
     console.error("NOVA Brain error:", error);
 
     res.status(500).json({
-      error: "NOVA Brain is unavailable. Make sure Ollama is running."
+      error:
+        "NOVA Brain is unavailable. Make sure Ollama is running."
     });
 
   }
@@ -176,7 +178,7 @@ app.post("/api/chat", async (req, res) => {
 
 
 // ========================================
-// START SERVER
+// START NOVA BACKEND
 // ========================================
 
 app.listen(PORT, () => {
