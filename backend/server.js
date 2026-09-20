@@ -47,13 +47,24 @@ app.post("/api/chat", async (req, res) => {
     );
 
     if (!ollamaResponse.ok) {
-      throw new Error("Ollama request failed.");
+      throw new Error(`Ollama returned ${ollamaResponse.status}`);
     }
 
     const data = await ollamaResponse.json();
 
+    let reply = data.message?.content || "";
+
+    // Remove any hidden thinking content if the model returns it.
+    reply = reply
+      .replace(/<think>[\s\S]*?<\/think>/gi, "")
+      .trim();
+
+    if (!reply) {
+      reply = "NOVA could not generate a response.";
+    }
+
     res.json({
-      reply: data.message?.content || "NOVA could not generate a response."
+      reply
     });
 
   } catch (error) {
