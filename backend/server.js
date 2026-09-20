@@ -9,7 +9,7 @@ app.use(express.json());
 
 
 // ========================================
-// NOVA AI — BASIC IDENTITY
+// NOVA AI IDENTITY
 // ========================================
 
 const NOVA_SYSTEM_PROMPT = `
@@ -17,29 +17,32 @@ You are NOVA AI.
 
 Your name is NOVA.
 
-You are a personal AI workspace assistant designed to help the user
-think, plan, learn, create, research, solve problems, and work with them.
+You are a personal AI workspace assistant.
+You help the user think, plan, learn, create, research,
+solve problems, write code, and work through tasks.
 
-IMPORTANT IDENTITY RULES:
-- Always identify yourself as NOVA when introducing yourself.
-- Do not introduce yourself as Qwen, Qwen3, Ollama, Tongyi, or any other model.
-- Do not say "I am Qwen3".
-- Do not mention the underlying AI model unless the user specifically asks about the technology powering NOVA.
-- Never claim to be ChatGPT.
-- Your user-facing identity is NOVA AI.
+IDENTITY RULES:
+- Your name is NOVA.
+- When introducing yourself, say you are NOVA.
+- Do not introduce yourself as Qwen.
+- Do not introduce yourself as Qwen3.
+- Do not introduce yourself as Ollama.
+- Do not introduce yourself as Tongyi.
+- Do not say you are ChatGPT.
+- Do not mention the underlying model unless the user specifically asks about it.
 
 LANGUAGE:
-- Respond in the same language/style the user is using.
-- If the user writes in English, respond in English.
-- If the user writes in Telugu script, respond in Telugu script.
-- If the user writes in Tanglish, respond naturally in Tanglish.
-- Keep the response easy to understand unless the user asks for detailed information.
+- Follow the language used by the user.
+- English input -> English response.
+- Telugu script input -> Telugu script response.
+- Tanglish input -> natural Tanglish response.
 
 STYLE:
-- Be friendly, natural, helpful, and intelligent.
-- Avoid unnecessary long introductions.
-- Do not reveal internal reasoning or hidden thinking.
-- Give the useful answer directly.
+- Be friendly.
+- Be clear.
+- Be helpful.
+- Answer directly.
+- Do not reveal hidden reasoning or internal thinking.
 `;
 
 
@@ -64,7 +67,6 @@ app.post("/api/chat", async (req, res) => {
 
   const { message } = req.body;
 
-  // Check message
   if (!message || !message.trim()) {
     return res.status(400).json({
       error: "Message is required."
@@ -72,10 +74,6 @@ app.post("/api/chat", async (req, res) => {
   }
 
   try {
-
-    // ========================================
-    // SEND MESSAGE TO LOCAL AI ENGINE
-    // ========================================
 
     const ollamaResponse = await fetch(
       "http://localhost:11434/api/chat",
@@ -88,29 +86,20 @@ app.post("/api/chat", async (req, res) => {
 
         body: JSON.stringify({
 
-          // Local model used by NOVA
           model: "qwen3:4b",
 
           messages: [
-
-            // NOVA identity
             {
               role: "system",
               content: NOVA_SYSTEM_PROMPT
             },
-
-            // User message
             {
               role: "user",
               content: message
             }
-
           ],
 
-          // Return one complete response
           stream: false,
-
-          // Ask Qwen not to expose thinking
           think: false
 
         })
@@ -118,22 +107,12 @@ app.post("/api/chat", async (req, res) => {
     );
 
 
-    // ========================================
-    // OLLAMA ERROR CHECK
-    // ========================================
-
     if (!ollamaResponse.ok) {
-
       throw new Error(
-        `Ollama returned ${ollamaResponse.status}`
+        "Ollama returned " + ollamaResponse.status
       );
-
     }
 
-
-    // ========================================
-    // READ AI RESPONSE
-    // ========================================
 
     const data = await ollamaResponse.json();
 
@@ -141,16 +120,14 @@ app.post("/api/chat", async (req, res) => {
 
 
     // ========================================
-    // REMOVE THINKING / REASONING
+    // REMOVE THINKING OUTPUT
     // ========================================
 
     if (reply.includes("</think>")) {
       reply = reply.split("</think>").pop();
     }
 
-    reply = reply
-      .replace(/<think>[\s\S]*?<\/think>/gi, "")
-      .trim();
+    reply = reply.trim();
 
 
     // ========================================
@@ -158,10 +135,52 @@ app.post("/api/chat", async (req, res) => {
     // ========================================
 
     reply = reply
-  .split("I am Qwen3").join("I am NOVA")
-  .split("I'm Qwen3").join("I'm NOVA")
-  .split("I am Qwen").join("I am NOVA")
-  .split("I'm Qwen").join("I'm NOVA")
-  .split("Qwen3").join("NOVA")
-  .split("Qwen").join("NOVA")
-  .split("Tongyi").join("NOVA");
+      .replaceAll("I am Qwen3", "I am NOVA")
+      .replaceAll("I'm Qwen3", "I'm NOVA")
+      .replaceAll("I am Qwen", "I am NOVA")
+      .replaceAll("I'm Qwen", "I'm NOVA")
+      .replaceAll("Qwen3", "NOVA")
+      .replaceAll("Qwen", "NOVA")
+      .replaceAll("Tongyi", "NOVA");
+
+
+    // ========================================
+    // FALLBACK
+    // ========================================
+
+    if (!reply) {
+      reply = "I'm NOVA, but I couldn't generate a response right now.";
+    }
+
+
+    // ========================================
+    // SEND TO FRONTEND
+    // ========================================
+
+    res.json({
+      reply: reply
+    });
+
+
+  } catch (error) {
+
+    console.error("NOVA Brain error:", error);
+
+    res.status(500).json({
+      error: "NOVA Brain is unavailable. Make sure Ollama is running."
+    });
+
+  }
+
+});
+
+
+// ========================================
+// START SERVER
+// ========================================
+
+app.listen(PORT, () => {
+  console.log(
+    "NOVA Brain running on http://localhost:" + PORT
+  );
+});
