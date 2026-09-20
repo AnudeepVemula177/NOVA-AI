@@ -158,4 +158,10 @@ app.post("/api/chat", async (req, res) => {
     // ========================================
 
     reply = reply
-      .replace(/\bI am
+  .split("I am Qwen3").join("I am NOVA")
+  .split("I'm Qwen3").join("I'm NOVA")
+  .split("I am Qwen").join("I am NOVA")
+  .split("I'm Qwen").join("I'm NOVA")
+  .split("Qwen3").join("NOVA")
+  .split("Qwen").join("NOVA")
+  .split("Tongyi").join("NOVA");
