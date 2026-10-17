@@ -15,8 +15,8 @@ body{margin:0;background:radial-gradient(circle at 70% -10%,#202044 0,transparen
 .app{display:flex;height:100vh}
 .sidebar{width:270px;background:rgba(13,16,22,.92);border-right:1px solid var(--border);padding:16px;display:flex;flex-direction:column;gap:16px}
 .brand{display:flex;align-items:center;gap:11px;padding:6px 4px 14px}
-.logo{width:38px;height:38px;border-radius:13px;background:radial-gradient(circle at 50% 48%,#fff 0 4%,#8b7cff 10%,#372f82 40%,#111322 72%);box-shadow:0 0 28px #7063ff55;position:relative}
-.logo:after{content:"N";position:absolute;inset:0;display:grid;place-items:center;font-weight:900;font-size:18px;color:white}
+.logo{width:38px;height:38px;border-radius:13px;background:radial-gradient(circle at 50% 48%,#fff 0 4%,#8b7cff 10%,#372f82 40%,#111322 72%);box-shadow:0 0 28px #7063ff55;display:grid;place-items:center;color:#e9e5ff;position:relative}
+.nova-symbol{width:72%;height:72%;display:block;color:#dcd7ff;filter:drop-shadow(0 0 7px #8b7cff88)}
 .brand b{font-size:18px}.brand span{display:block;color:var(--muted);font-size:11px;margin-top:2px}
 .new{border:1px solid #393c58;background:linear-gradient(135deg,#211e3b,#151824);color:#fff;border-radius:12px;padding:12px 14px;cursor:pointer;font-weight:700}
 .section{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#626b7d;padding:4px}
@@ -34,7 +34,8 @@ body{margin:0;background:radial-gradient(circle at 70% -10%,#202044 0,transparen
 .content{flex:1;overflow:auto;padding:28px 18px 160px;scrollbar-width:none}.content::-webkit-scrollbar{display:none}
 .wrap{max-width:860px;margin:auto}
 .hero{text-align:center;padding:92px 10px 30px}
-.hero .biglogo{margin:auto;width:72px;height:72px;border-radius:24px;background:radial-gradient(circle at 50% 48%,#fff 0 5%,#8b7cff 11%,#30286f 43%,#10121d 72%);box-shadow:0 0 55px #7164ff55;display:grid;place-items:center;font-size:31px;font-weight:900}
+.hero .biglogo{margin:auto;width:78px;height:78px;border-radius:25px;background:radial-gradient(circle at 50% 48%,#fff 0 5%,#8b7cff 11%,#30286f 43%,#10121d 72%);box-shadow:0 0 55px #7164ff55;display:grid;place-items:center;color:#eeeaff}
+.hero .biglogo .nova-symbol{width:58px;height:58px;filter:drop-shadow(0 0 11px #8b7cffaa)}
 .hero h1{font-size:34px;margin:22px 0 9px;letter-spacing:-.04em}.hero p{color:var(--muted);margin:0 auto;font-size:15px;line-height:1.65;max-width:620px}
 .suggestions{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:20px auto;max-width:680px}
 .card{border:1px solid var(--border);background:linear-gradient(135deg,#131720,#10131a);border-radius:14px;padding:14px;text-align:left;cursor:pointer;transition:.2s}
@@ -113,7 +114,7 @@ textarea{
   }
   .sidebar.menu-open{transform:translateX(0)}
   .sidebar .brand{padding:6px 4px 14px;flex:0 0 auto}
-  .sidebar .brand .logo{width:38px;height:38px}
+  .sidebar .brand .logo{width:40px;height:40px}
   .sidebar .brand span{display:block}
   .drawer-close{
     display:block;margin-left:auto;width:36px;height:36px;
@@ -157,7 +158,7 @@ textarea{
     background:rgba(13,16,22,.99);
     box-shadow:0 -18px 28px rgba(13,16,22,.98);
   }
-  .plan-mini{margin-bottom:9px;padding:10px 11px;border:1px solid #2d3150;border-radius:12px;background:linear-gradient(135deg,#17172a,#11141d);cursor:pointer}.plan-mini b{font-size:12px}.plan-mini small{display:block;color:#737d91;font-size:10px;margin-top:3px}.plan-mini .meter{height:4px;background:#252a38;border-radius:99px;margin-top:8px;overflow:hidden}.plan-mini .meter i{display:block;width:6.4%;height:100%;background:linear-gradient(90deg,#8b7cff,#42d9ff);border-radius:99px}.drawer-login{
+  .plan-mini{margin-bottom:9px;padding:11px 11px 10px;border:1px solid #2d3150;border-radius:13px;background:linear-gradient(135deg,#17172a,#11141d);cursor:pointer}.plan-head{display:flex;align-items:center;gap:9px}.plan-badge{width:28px;height:28px;flex:0 0 28px;border-radius:9px;display:grid;place-items:center;background:radial-gradient(circle,#fff 0 5%,#8b7cff 15%,#30286f 58%,#10121d 80%);color:#eeeaff;box-shadow:0 0 13px #7568ff44}.plan-badge .nova-symbol{width:20px;height:20px}.plan-copy b{font-size:12px;display:block;line-height:1.15}.plan-copy small{display:block;color:#737d91;font-size:9.5px;margin-top:3px}.credit-line{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;color:#737d91;font-size:10px}.credit-line strong{color:#bfc6d4;font-size:10px;font-weight:600}.plan-mini .meter{height:4px;background:#252a38;border-radius:99px;margin-top:7px;overflow:hidden}.plan-mini .meter i{display:block;width:6.4%;height:100%;background:linear-gradient(90deg,#8b7cff,#42d9ff);border-radius:99px}.drawer-login{
     width:100%!important;margin:0!important;display:flex!important;
     align-items:center!important;gap:11px!important;
     border:0!important;background:transparent!important;color:#cbd1dc!important;
@@ -272,7 +273,7 @@ textarea{
 }
 .drawer-login{width:100%!important;margin:0!important;display:flex!important;align-items:center!important;gap:10px!important;border:0!important;background:transparent!important;color:#cbd1dc!important;padding:10px!important;border-radius:11px!important;cursor:pointer!important}
 .drawer-login:hover{background:#171c26!important}
-.drawer-avatar{width:34px;height:34px;flex:0 0 34px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#fff 0 6%,#8b7cff 13%,#282354 50%,#0d1017 75%);box-shadow:0 0 18px #7568ff66;font-weight:900;color:#fff}
+.drawer-avatar{width:34px;height:34px;flex:0 0 34px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#fff 0 6%,#8b7cff 13%,#282354 50%,#0d1017 75%);box-shadow:0 0 18px #7568ff66;color:#eeeaff}.drawer-avatar .nova-symbol{width:23px;height:23px}
 .login-copy{flex:1;min-width:0}.login-copy b{display:block;font-size:14px;color:#f0f2f7}.login-copy small{display:block;color:#717b8d;font-size:10px;margin-top:3px}.login-arrow{font-size:22px;color:#70798a;line-height:1}
 .top-hamburger{display:block;flex:0 0 38px;width:38px;height:38px;border:0;background:transparent;color:#dce1eb;padding:0;border-radius:0;font-size:25px;line-height:38px;text-align:center;cursor:pointer}
 .main{width:100%;padding-top:0}
@@ -322,13 +323,55 @@ textarea{
 .drawer-login-area{position:absolute!important;left:16px!important;right:16px!important;bottom:12px!important;width:auto!important;margin:0!important;z-index:120!important;padding:10px 0 0!important;border-top:1px solid var(--border)!important;background:rgba(13,16,22,.99)!important;box-shadow:0 -18px 28px rgba(13,16,22,.99)!important;}
 .drawer-login{width:100%!important;}
 @media(max-width:700px){.drawer-main-options{padding-bottom:190px!important}.drawer-login-area{left:16px!important;right:16px!important;bottom:12px!important;width:auto!important;}}
+
+/* v45 — CLEAN DRAWER LAYOUT / FOOTER ALWAYS VISIBLE */
+.sidebar{
+  height:100dvh!important;
+  min-height:0!important;
+  overflow:hidden!important;
+  display:flex!important;
+  flex-direction:column!important;
+}
+.menu-panel{
+  flex:1 1 auto!important;
+  min-height:0!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  padding:8px 0 0!important;
+}
+.drawer-main-options{
+  height:auto!important;
+  min-height:0!important;
+  overflow:visible!important;
+  padding-bottom:20px!important;
+}
+.drawer-login-area{
+  position:relative!important;
+  left:auto!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:auto!important;
+  flex:0 0 auto!important;
+  margin:0!important;
+  padding:10px 0 calc(10px + env(safe-area-inset-bottom))!important;
+  border-top:1px solid var(--border)!important;
+  background:rgba(13,16,22,.99)!important;
+  box-shadow:0 -18px 28px rgba(13,16,22,.99)!important;
+  z-index:120!important;
+}
+@media(max-width:700px){
+  .sidebar{height:100dvh!important;width:282px!important;}
+  .menu-panel{overflow-y:auto!important;}
+  .drawer-login-area{padding-bottom:calc(10px + env(safe-area-inset-bottom))!important;}
+}
+
 </style>
 </head>
 <body>
 <div class="app">
   <aside class="sidebar">
     <div class="brand">
-      <div class="logo"></div>
+      <div class="logo" aria-label="NOVA symbol"><svg class="nova-symbol" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="23" ry="11" transform="rotate(-28 32 32)" fill="none" stroke="currentColor" stroke-width="2.2" opacity=".82"></ellipse><ellipse cx="32" cy="32" rx="23" ry="11" transform="rotate(28 32 32)" fill="none" stroke="currentColor" stroke-width="2.2" opacity=".55"></ellipse><path d="M32 17.5 36.1 27.9 46.5 32l-10.4 4.1L32 46.5l-4.1-10.4L17.5 32l10.4-4.1L32 17.5Z" fill="currentColor"></path><circle cx="49" cy="18" r="2.1" fill="currentColor"></circle></svg></div>
       <div><b>NOVA AI</b><span>Think • Plan • Do • With You</span></div>
       <button class="drawer-close" onclick="closeMenu()" aria-label="Close menu">×</button>
     </div>
@@ -358,9 +401,16 @@ textarea{
     </div>
 
     <div class="drawer-login-area">
-      <div class="plan-mini" onclick="openPlans()"><b>✦ NOVA Free</b><small>32 / 500 AI credits used</small><div class="meter"><i></i></div></div>
+      <div class="plan-mini" onclick="openPlans()">
+        <div class="plan-head">
+          <span class="plan-badge"><svg class="nova-symbol" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="23" ry="11" transform="rotate(-28 32 32)" fill="none" stroke="currentColor" stroke-width="2.2" opacity=".82"></ellipse><ellipse cx="32" cy="32" rx="23" ry="11" transform="rotate(28 32 32)" fill="none" stroke="currentColor" stroke-width="2.2" opacity=".55"></ellipse><path d="M32 17.5 36.1 27.9 46.5 32l-10.4 4.1L32 46.5l-4.1-10.4L17.5 32l10.4-4.1L32 17.5Z" fill="currentColor"></path><circle cx="49" cy="18" r="2.1" fill="currentColor"></circle></svg></span>
+          <span class="plan-copy"><b>NOVA Free</b><small>Free workspace</small></span>
+        </div>
+        <div class="credit-line"><span>AI credits</span><strong>32 / 500 used</strong></div>
+        <div class="meter"><i></i></div>
+      </div>
       <button class="drawer-login" onclick="showFeature('Login / Sign up')">
-        <span class="drawer-avatar">N</span>
+        <span class="drawer-avatar"><svg class="nova-symbol" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="23" ry="11" transform="rotate(-28 32 32)" fill="none" stroke="currentColor" stroke-width="2.2" opacity=".82"></ellipse><ellipse cx="32" cy="32" rx="23" ry="11" transform="rotate(28 32 32)" fill="none" stroke="currentColor" stroke-width="2.2" opacity=".55"></ellipse><path d="M32 17.5 36.1 27.9 46.5 32l-10.4 4.1L32 46.5l-4.1-10.4L17.5 32l10.4-4.1L32 17.5Z" fill="currentColor"></path><circle cx="49" cy="18" r="2.1" fill="currentColor"></circle></svg></span>
         <span class="login-copy">
           <b>Login / Sign up</b>
           <small>Access your NOVA workspace</small>
@@ -381,7 +431,7 @@ textarea{
     <section class="content" id="content">
       <div class="wrap">
         <div class="hero" id="hero">
-          <div class="biglogo">N</div>
+          <div class="biglogo" aria-label="NOVA symbol"><svg class="nova-symbol" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="23" ry="11" transform="rotate(-28 32 32)" fill="none" stroke="currentColor" stroke-width="2.2" opacity=".82"></ellipse><ellipse cx="32" cy="32" rx="23" ry="11" transform="rotate(28 32 32)" fill="none" stroke="currentColor" stroke-width="2.2" opacity=".55"></ellipse><path d="M32 17.5 36.1 27.9 46.5 32l-10.4 4.1L32 46.5l-4.1-10.4L17.5 32l10.4-4.1L32 17.5Z" fill="currentColor"></path><circle cx="49" cy="18" r="2.1" fill="currentColor"></circle></svg></div>
           <h1>What are we building today?</h1>
           <p>NOVA is your personal AI workspace — curious, practical, and built to work with you.</p>
         </div>
@@ -613,107 +663,66 @@ function mockReply(text){
   return conversationReply(text);
 }
 
+/* Configure these with the NOVA Supabase project's URL and publishable/anon key.
+   Never put the Gemini API key in this frontend file. */
+const NOVA_SUPABASE_URL = 'https://ndrgsorhkqdyxgwxlkiv.supabase.co';
+
+const NOVA_SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_PYyqK-VK5h3M5FPk-dd-Kg_ixusq8Zj';
+
 async function send(){
+  const input=document.getElementById('input'), text=input.value.trim();
+  if(!text)return;
+  if(window.novaSending)return;
+  window.novaSending=true;
+  const sendButton=document.querySelector('.send');
+  if(sendButton)sendButton.disabled=true;
 
-  const input = document.getElementById('input');
-  const text = input.value.trim();
+  document.getElementById('hero').style.display='none';
+  const box=document.getElementById('messages');
+  box.insertAdjacentHTML('beforeend',`<div class="msg" style="display:block"><div class="bubble user">${escapeHtml(text)}</div></div>`);
+  input.value='';
 
-  if(!text) return;
-  input.value = '';
-  document.getElementById('hero').style.display = 'none';
-
-  const box = document.getElementById('messages');
-
-  box.insertAdjacentHTML(
-    'beforeend',
-    `<div class="msg" style="display:block">
-      <div class="bubble user">${escapeHtml(text)}</div>
-    </div>`
-  );
-
-  const explicit = detectLanguageRequest(text);
-  const detected = detectNonEnglish(text);
-
-  if(explicit){
-
-    novaLanguage = explicit;
-    languageOfferShown = true;
-
-    const confirmation =
-      explicit === 'telugu'
-        ? 'సరే 😊 ఇక నుంచి మన conversation తెలుగులో కొనసాగిద్దాం.'
-        : explicit === 'tanglish'
-          ? 'Sare bro 😊 Ippati nunchi manam Tanglish lo continue cheddam.'
-          : "Got it 💫 I'll continue in <strong>English</strong> from here.";
-
+  const explicit=detectLanguageRequest(text);
+  const detected=detectNonEnglish(text);
+  if(explicit){novaLanguage=explicit;languageOfferShown=true;}
+  else if(novaLanguage==='english' && detected && !languageOfferShown){
+    languageOfferShown=true;
     showNovaThinking();
-
-    setTimeout(() => {
-      hideNovaThinking();
-      appendNovaMessage(confirmation, {source:text});
-    }, 700);
-
-  }else if(
-    novaLanguage === 'english' &&
-    detected &&
-    !languageOfferShown
-  ){
-
-    languageOfferShown = true;
-
-    showNovaThinking();
-
-    setTimeout(() => {
-      hideNovaThinking();
-      appendNovaMessage(languagePrompt(), {source:text});
-    }, 700);
-
-  }else{
-
-    showNovaThinking();
-
-    try{
-
-      const response = await fetch(
-        'http://localhost:3000/api/chat',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            message: text
-          })
-        }
-      );
-
-      const data = await response.json();
-
-      hideNovaThinking();
-
-      if(!response.ok){
-        throw new Error(data.error || 'NOVA Brain error');
-      }
-
-      appendNovaMessage(
-        data.reply || 'NOVA could not generate a response.',
-        {source:text}
-      );
-
-    }catch(error){
-
-      hideNovaThinking();
-
-      appendNovaMessage(
-        '⚠️ NOVA Brain is unavailable. Make sure the NOVA backend and Ollama are running.',
-        {source:text}
-      );
-
-      console.error('NOVA Brain error:', error);
-    }
+    setTimeout(()=>{hideNovaThinking();appendNovaMessage(languagePrompt(),{source:text});},350);
+    window.novaSending=false;
+    if(sendButton)sendButton.disabled=false;
+    return;
   }
 
+  showNovaThinking();
+  try{
+    if(NOVA_SUPABASE_URL.includes('PASTE_YOUR_') || NOVA_SUPABASE_PUBLISHABLE_KEY.includes('PASTE_YOUR_')){
+      throw new Error('Setup needed: add your NOVA Supabase project URL and publishable key in the frontend configuration.');
+    }
+    const response=await fetch(`${NOVA_SUPABASE_URL.replace(/\/$/,'')}/functions/v1/nova-chat`,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'apikey':NOVA_SUPABASE_PUBLISHABLE_KEY,
+        'Authorization':`Bearer ${NOVA_SUPABASE_PUBLISHABLE_KEY}`
+      },
+      body:JSON.stringify({message:text,language:novaLanguage})
+    });
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(data.error || `NOVA request failed (${response.status}). Check the Edge Function logs.`);
+    if(typeof data.reply!=='string' || !data.reply.trim())throw new Error('NOVA returned an empty response. Check the Edge Function logs.');
+    hideNovaThinking();
+    appendNovaMessage(escapeHtml(data.reply).replace(/\n/g,'<br>'),{source:text});
+  }catch(error){
+    hideNovaThinking();
+    appendNovaMessage(`<strong>Could not reach NOVA yet.</strong><br>${escapeHtml(error.message||'Please try again.')}`,{source:text});
+  }finally{
+    window.novaSending=false;
+    if(sendButton)sendButton.disabled=false;
+    input.focus();
+  }
 }
+
 function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
 function toggleMenu(){
   const sidebar=document.querySelector('.sidebar');
